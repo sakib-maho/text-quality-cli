@@ -17,13 +17,13 @@ It can be used to score content drafts and verify keyword presence.
 - Reusable helper module (`src/text_checks.py`)
 - Automated tests including CLI execution
 
-## Usage
+## Quick Start
 
 ```bash
 python3 cli.py "Project 2026 update includes tests and docs." --keyword tests
 ```
 
-## Run Tests
+## Tests
 
 ```bash
 python3 -m unittest discover -s tests -p "test_*.py"
