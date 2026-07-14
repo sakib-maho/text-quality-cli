@@ -1,4 +1,4 @@
-# Sandbox Testing Repo (Upgraded)
+# Text Quality CLI
 
 <!-- BrandCloud:readme-standard -->
 [![Maintained](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](#)
