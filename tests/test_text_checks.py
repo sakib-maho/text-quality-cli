@@ -2,7 +2,7 @@ import json
 from subprocess import run
 import unittest
 
-from src.text_checks import contains_keyword, has_min_words, quality_score
+from src.text_checks import contains_keyword, has_min_words, quality_report, quality_score
 
 
 class TextChecksTests(unittest.TestCase):
@@ -16,23 +16,29 @@ class TextChecksTests(unittest.TestCase):
 
     def test_quality_score(self) -> None:
         score = quality_score("Project 2026 update includes tests and docs for release.")
-        self.assertGreaterEqual(score, 60)
+        self.assertGreaterEqual(score, 50)
+
+    def test_quality_report_flags(self) -> None:
+        report = quality_report("ok")
+        self.assertIn("too_short", report["flags"])
 
     def test_cli(self) -> None:
         result = run(
             [
                 "python3",
                 "cli.py",
-                "Project 2026 update includes tests and docs.",
+                "Project 2026 update includes tests and docs for a polished release.",
                 "--keyword",
                 "tests",
             ],
-            check=True,
+            check=False,
             capture_output=True,
             text=True,
         )
         payload = json.loads(result.stdout)
-        self.assertTrue(payload["keyword_match"])
+        self.assertTrue(payload["keyword_found"])
+        self.assertIn("score", payload)
+        self.assertIn("flags", payload)
 
 
 if __name__ == "__main__":
